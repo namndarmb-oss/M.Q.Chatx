@@ -14,7 +14,7 @@ android {
     compileSdkVersion project.Mesibo_compileSdkVersion
 
     defaultConfig {
-        applicationId "org.mesibo.messenger"
+        applicationId "com.mq.android"
         minSdkVersion project.Mesibo_minSdkVersion
         targetSdkVersion project.Mesibo_targetSdkVersion
         versionCode project.PUBLISH_VERSION_CODE
