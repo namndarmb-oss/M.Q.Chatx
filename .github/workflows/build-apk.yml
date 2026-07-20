@@ -1,0 +1,35 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  # امکان اجرای دستی گردش کار
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 1️⃣ دریافت کد منبع
+      uses: actions/checkout@v4
+
+    - name: 2️⃣ تنظیم Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '11' # پروژه بر اساس Java 11 است
+
+    - name: 3️⃣ تنظیم مجوزهای Gradle
+      run: chmod +x gradlew
+
+    - name: 4️⃣ ساخت APK (نسخه Debug)
+      run: ./gradlew assembleDebug
+
+    - name: 5️⃣ آپلود فایل APK (به عنوان Artifact)
+      uses: actions/upload-artifact@v4
+      with:
+        name: Mesibo-Messenger-Debug
+        path: app/build/outputs/apk/debug/app-debug.apk
